@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Double the Trouble ✨</title>
+<style>
+  :root { --pink:#ff5da2; --yellow:#ffe66d; --purple:#8b5cf6; --blue:#4cc9f0; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; overflow-x:hidden; color:#2b1747;
+    font-family: "Trebuchet MS", system-ui, sans-serif;
+    background: linear-gradient(135deg,#ffb3d1 0%,#ffd6a5 35%,#cdb4ff 70%,#a0e7e5 100%);
+  }
+  .sparkle { position:fixed; pointer-events:none; opacity:.75; animation: float 7s ease-in-out infinite; z-index:0; }
+  @keyframes float { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-22px) rotate(15deg)} }
+  .wrap { position:relative; z-index:1; width:min(900px,92%); margin:auto; padding:35px 0 55px; }
+  .hero, .panel { background:rgba(255,255,255,.86); border:3px solid white; border-radius:30px; box-shadow:0 16px 40px #6c348322; }
+  .hero { text-align:center; padding:42px 22px 34px; }
+  .tag { display:inline-block; background:#2b1747; color:white; border-radius:999px; padding:8px 15px; font-size:.78rem; letter-spacing:1.5px; }
+  h1 { font-size:clamp(2.6rem,8vw,5.2rem); line-height:.98; margin:20px 0 12px; color:#f03e91; text-shadow:3px 3px 0 #ffe66d; }
+  .sub { font-size:1.15rem; max-width:620px; margin:0 auto 22px; line-height:1.6; }
+  button { border:0; border-radius:999px; padding:14px 22px; background:#2b1747; color:white; font-weight:800; font-size:1rem; cursor:pointer; box-shadow:0 5px 0 #b7a0d8; transition:transform .15s; }
+  button:hover { transform:translateY(-3px) rotate(-1deg); }
+  button:active { transform:translateY(2px); box-shadow:0 2px 0 #b7a0d8; }
+  .panel { margin-top:22px; padding:26px; }
+  .panel h2 { margin:0 0 12px; color:#7b2cbf; font-size:1.7rem; }
+  .hidden { display:none; }
+  .letter { background:#fff0f6; border:2px dashed #ff5da2; border-radius:22px; padding:20px; line-height:1.8; font-size:1.05rem; }
+  .twins { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
+  .twin { border-radius:22px; padding:20px; text-align:center; background:linear-gradient(145deg,#fff1a8,#ffd1e8); }
+  .twin:nth-child(2) { background:linear-gradient(145deg,#c8f7ff,#dfccff); }
+  .twin .emoji { font-size:2.8rem; }
+  .small { font-size:.9rem; opacity:.8; }
+  .cake { font-size:5rem; text-align:center; margin:6px; cursor:pointer; user-select:none; transition:transform .2s; }
+  .cake:hover { transform:scale(1.1) rotate(5deg); }
+  .footer { text-align:center; padding:26px 10px 0; font-weight:700; }
+  #fireworks { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:5; }
+  .pop { animation:pop .45s ease; }
+  @keyframes pop { 0%{transform:scale(.7)} 70%{transform:scale(1.06)} 100%{transform:scale(1)} }
+  @media(max-width:600px){ .twins{grid-template-columns:1fr} .hero{padding:32px 16px} .panel{padding:20px} }
+</style>
+</head>
+<body>
+<canvas id="fireworks"></canvas>
+<div class="sparkle" style="top:8%;left:7%;font-size:30px">⭐</div>
+<div class="sparkle" style="top:18%;right:8%;font-size:35px;animation-delay:1s">💖</div>
+<div class="sparkle" style="top:58%;left:4%;font-size:27px;animation-delay:2s">🍜</div>
+<div class="sparkle" style="top:76%;right:6%;font-size:32px;animation-delay:1.5s">🎉</div>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="tag">A VERY IMPORTANT ANNOUNCEMENT 📢</span>
+    <h1>SRUTI &amp; SMRUTI<br>DOUBLE THE TROUBLE! 🎉</h1>
+    <p class="sub">Two birthdays. One legendary duo. And one roommate who is extremely lucky to have you both.</p>
+    <button onclick="reveal()">TAP FOR YOUR SURPRISE ✨</button>
+    <p class="small">P.S. Maximum chaos is encouraged.</p>
+  </section>
+
+  <section id="surprise" class="panel hidden">
+    <h2>HAPPY BIRTHDAY, YOU TWO!! 🥳</h2>
+    <div class="letter">
+      I hope you both know how much fun you make ordinary days. Especially those moments before an exam when we're supposed to be studying, but somehow end up laughing about the most absurd things ever. 😂<br><br>
+      And obviously, no list of our best moments is complete without our Maggie sessions. 🍜 Somehow, exam stress, random conversations and Maggie taste better when we're all together.<br><br>
+      Thank you for all the laughs, the silly conversations, the little breaks and the memories we're making in this hostel room. I hope this new year brings you both loads of happiness, success, good health, fewer stressful exams and unlimited reasons to laugh.<br><br>
+      Stay chaotic, stay wonderful, and never stop being you. Love you both! 💗
+    </div>
+    <div class="twins">
+      <div class="twin"><div class="emoji">🎀</div><h3>Sruti</h3><p>Your own special day, your own spotlight. Keep shining!</p></div>
+      <div class="twin"><div class="emoji">🪩</div><h3>Smruti</h3><p>Your own special day, your own spotlight. Keep sparkling!</p></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>🎂 The Official Birthday Cake</h2>
+    <p>Tap the cake to make a wish and set off some birthday fireworks!</p>
+    <div class="cake" onclick="celebrate()" role="button" aria-label="Celebrate with fireworks">🎂</div>
+    <div style="text-align:center"><button onclick="celebrate()">LIGHT UP THE SKY! 🎆</button></div>
+    <p id="wish" class="small" style="text-align:center;margin-top:14px"></p>
+  </section>
+
+  <section class="panel" style="text-align:center">
+    <h2>ONE LAST THING… 💌</h2>
+    <p>May your year be as full of joy as our pre-exam nonsense, and as satisfying as a hot bowl of Maggie at the perfect time.</p>
+    <button onclick="finale()">SEND UNLIMITED BIRTHDAY VIBES 💥</button>
+    <p id="final" class="hidden" style="font-size:1.2rem;font-weight:900;color:#e83e8c;margin-top:18px">YOU BOTH DESERVE THE WHOLE UNIVERSE! 🌈💖🎉</p>
+  </section>
+  <div class="footer">Made with love, laughter & a little bit of hostel-room madness. ❤️</div>
+</main>
+<script>
+function reveal(){
+  const s=document.getElementById('surprise'); s.classList.remove('hidden'); s.classList.add('pop');
+  s.scrollIntoView({behavior:'smooth',block:'start'}); celebrate();
+}
+function finale(){
+  document.getElementById('final').classList.remove('hidden');
+  document.getElementById('final').classList.add('pop'); celebrate();
+}
+document.getElementById('wish').textContent="Make a wish, birthday legends. The sky is waiting! ✨";
+
+// Lightweight colourful firework bursts drawn on canvas (visual effect only).
+const canvas=document.getElementById('fireworks'), ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+addEventListener('resize',resize); resize();
+function burst(x=Math.random()*W,y=Math.random()*H*.55){
+  const colors=['#ff2d95','#ffe66d','#7b2cff','#00c2ff','#ff6b35','#43d17a'];
+  for(let i=0;i<75;i++){
+    const a=Math.PI*2*i/75, speed=1.5+Math.random()*5;
+    particles.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:65+Math.random()*25,color:colors[Math.floor(Math.random()*colors.length)],r:2+Math.random()*2});
+  }
+}
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  particles=particles.filter(p=>p.life>0);
+  for(const p of particles){
+    p.x+=p.vx; p.y+=p.vy; p.vy+=.045; p.vx*=.99; p.vy*=.99; p.life--;
+    ctx.globalAlpha=Math.min(1,p.life/25); ctx.fillStyle=p.color;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+  }
+  ctx.globalAlpha=1; requestAnimationFrame(animate);
+}
+animate();
+function celebrate(){
+  burst(W*.25,H*.28); burst(W*.72,H*.22); burst(W*.5,H*.42);
+  setTimeout(()=>burst(W*.38,H*.18),250); setTimeout(()=>burst(W*.64,H*.36),500);
+}
+</script>
+</body>
+</html>
